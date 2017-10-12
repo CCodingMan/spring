@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+   http://www.springframework.org/schema/beans 
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/aop 
+   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+   http://www.springframework.org/schema/tx 
+   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+   http://www.springframework.org/schema/context      
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+   
+   <!-- 配合注解 -->
+   <!-- <context:annotation-config /> -->
+   
+   <!-- 配合注解 -->
+   <!-- <bean name="c" class="com.ljj.pojo.Category">
+     <property name="name" value="手机"></property>
+   </bean> -->
+   
+   <!-- 配合注解 -->
+   <!-- <bean name="p" class="com.ljj.pojo.Product">
+     <property name="name" value="iphone"></property>
+     使用注解因此注释
+     <property name="category" ref="c"></property>
+   </bean> -->
+   
+   <context:component-scan base-package="com.ljj.pojo" />
+   
+   <!-- aop -->
+   <bean name="s" class="com.ljj.service.ProductService" />
+   <bean id="loggerAspect" class="com.ljj.aspect.LoggerAspect" />
+   <aop:config>
+     <aop:pointcut id="loggerCutpoint"
+     expression=
+     "execution(* com.ljj.service.ProductService.*(..))"/>
+     
+     <aop:aspect id="logAspect" ref="loggerAspect">
+       <aop:around method="log" pointcut-ref="loggerCutpoint"/>
+     </aop:aspect>
+   </aop:config>
+   
+ </beans>
