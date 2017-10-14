@@ -31,8 +31,8 @@
    
    <context:component-scan base-package="com.ljj.pojo" />
    
-   <!-- aop -->
-   <bean name="s" class="com.ljj.service.ProductService" />
+   <!-- aop xml配置 -->
+   <!-- <bean name="s" class="com.ljj.service.ProductService" />
    <bean id="loggerAspect" class="com.ljj.aspect.LoggerAspect" />
    <aop:config>
      <aop:pointcut id="loggerCutpoint"
@@ -42,6 +42,11 @@
      <aop:aspect id="logAspect" ref="loggerAspect">
        <aop:around method="log" pointcut-ref="loggerCutpoint"/>
      </aop:aspect>
-   </aop:config>
+   </aop:config> -->
+   
+   <!-- aop 注解配置 -->
+   <context:component-scan base-package="com.ljj.service" />
+   <context:component-scan base-package="com.ljj.aspect" />
+   <aop:aspectj-autoproxy />
    
  </beans>
